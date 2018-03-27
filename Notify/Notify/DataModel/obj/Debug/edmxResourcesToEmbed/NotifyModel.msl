@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NotifyModelStoreContainer" CdmEntityContainer="NotifyEntities">
+    <EntitySetMapping Name="tblDepartments">
+      <EntityTypeMapping TypeName="NotifyModel.tblDepartment">
+        <MappingFragment StoreEntitySet="tblDepartment">
+          <ScalarProperty Name="tblDepartmentID" ColumnName="tblDepartmentID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LabelColor" ColumnName="LabelColor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmployees">
+      <EntityTypeMapping TypeName="NotifyModel.tblEmployee">
+        <MappingFragment StoreEntitySet="tblEmployee">
+          <ScalarProperty Name="tblEmployeeID" ColumnName="tblEmployeeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMessages">
+      <EntityTypeMapping TypeName="NotifyModel.tblMessage">
+        <MappingFragment StoreEntitySet="tblMessage">
+          <ScalarProperty Name="tblMessageID" ColumnName="tblMessageID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="tblDepartmentID" ColumnName="tblDepartmentID" />
+          <ScalarProperty Name="tblPriorityID" ColumnName="tblPriorityID" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMessageMedias">
+      <EntityTypeMapping TypeName="NotifyModel.tblMessageMedia">
+        <MappingFragment StoreEntitySet="tblMessageMedia">
+          <ScalarProperty Name="tblMessageMediaID" ColumnName="tblMessageMediaID" />
+          <ScalarProperty Name="tblMessageID" ColumnName="tblMessageID" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="tblMediaType" ColumnName="tblMediaType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPriorities">
+      <EntityTypeMapping TypeName="NotifyModel.tblPriority">
+        <MappingFragment StoreEntitySet="tblPriority">
+          <ScalarProperty Name="tblPriorityID" ColumnName="tblPriorityID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTabs">
+      <EntityTypeMapping TypeName="NotifyModel.tblTab">
+        <MappingFragment StoreEntitySet="tblTab">
+          <ScalarProperty Name="tblTabID" ColumnName="tblTabID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="tblEmployeeMessage" TypeName="NotifyModel.tblEmployeeMessage" StoreEntitySet="tblEmployeeMessage">
+      <EndProperty Name="tblEmployee">
+        <ScalarProperty Name="tblEmployeeID" ColumnName="tblEmployeeID" />
+      </EndProperty>
+      <EndProperty Name="tblMessage">
+        <ScalarProperty Name="tblMessageID" ColumnName="tblMessageID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

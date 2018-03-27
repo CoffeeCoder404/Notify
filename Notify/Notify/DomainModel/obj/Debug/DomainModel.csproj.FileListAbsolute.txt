@@ -1,0 +1,8 @@
+C:\Users\ashish.khanchandani\Desktop\notify\Notify\Notify\DomainModel\bin\Debug\DomainModel.dll.config
+C:\Users\ashish.khanchandani\Desktop\notify\Notify\Notify\DomainModel\bin\Debug\DomainModel.dll
+C:\Users\ashish.khanchandani\Desktop\notify\Notify\Notify\DomainModel\bin\Debug\DomainModel.pdb
+C:\Users\ashish.khanchandani\Desktop\notify\Notify\Notify\DomainModel\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ashish.khanchandani\Desktop\notify\Notify\Notify\DomainModel\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ashish.khanchandani\Desktop\notify\Notify\Notify\DomainModel\obj\Debug\DomainModel.csprojResolveAssemblyReference.cache
+C:\Users\ashish.khanchandani\Desktop\notify\Notify\Notify\DomainModel\obj\Debug\DomainModel.dll
+C:\Users\ashish.khanchandani\Desktop\notify\Notify\Notify\DomainModel\obj\Debug\DomainModel.pdb

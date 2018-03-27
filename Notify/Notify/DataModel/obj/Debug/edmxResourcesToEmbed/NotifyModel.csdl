@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NotifyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="tblDepartmentID" />
+    </Key>
+    <Property Name="tblDepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LabelColor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblMessages" Relationship="Self.FK_tblMessage_tblDepartment" FromRole="tblDepartment" ToRole="tblMessage" />
+  </EntityType>
+  <EntityType Name="tblEmployee">
+    <Key>
+      <PropertyRef Name="tblEmployeeID" />
+    </Key>
+    <Property Name="tblEmployeeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblMessages" Relationship="Self.tblEmployeeMessage" FromRole="tblEmployee" ToRole="tblMessage" />
+  </EntityType>
+  <EntityType Name="tblMessage">
+    <Key>
+      <PropertyRef Name="tblMessageID" />
+    </Key>
+    <Property Name="tblMessageID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="tblDepartmentID" Type="Int32" Nullable="false" />
+    <Property Name="tblPriorityID" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tblDepartment" Relationship="Self.FK_tblMessage_tblDepartment" FromRole="tblMessage" ToRole="tblDepartment" />
+    <NavigationProperty Name="tblPriority" Relationship="Self.FK_tblMessage_tblPriority" FromRole="tblMessage" ToRole="tblPriority" />
+    <NavigationProperty Name="tblMessageMedias" Relationship="Self.FK_tblMessageMedia_tblMessage" FromRole="tblMessage" ToRole="tblMessageMedia" />
+    <NavigationProperty Name="tblEmployees" Relationship="Self.tblEmployeeMessage" FromRole="tblMessage" ToRole="tblEmployee" />
+  </EntityType>
+  <EntityType Name="tblMessageMedia">
+    <Key>
+      <PropertyRef Name="tblMessageMediaID" />
+    </Key>
+    <Property Name="tblMessageMediaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tblMessageID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Path" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tblMediaType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblMessage" Relationship="Self.FK_tblMessageMedia_tblMessage" FromRole="tblMessageMedia" ToRole="tblMessage" />
+  </EntityType>
+  <EntityType Name="tblPriority">
+    <Key>
+      <PropertyRef Name="tblPriorityID" />
+    </Key>
+    <Property Name="tblPriorityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblMessages" Relationship="Self.FK_tblMessage_tblPriority" FromRole="tblPriority" ToRole="tblMessage" />
+  </EntityType>
+  <EntityType Name="tblTab">
+    <Key>
+      <PropertyRef Name="tblTabID" />
+    </Key>
+    <Property Name="tblTabID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Priority" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblMessage_tblDepartment">
+    <End Role="tblDepartment" Type="Self.tblDepartment" Multiplicity="1" />
+    <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepartment">
+        <PropertyRef Name="tblDepartmentID" />
+      </Principal>
+      <Dependent Role="tblMessage">
+        <PropertyRef Name="tblDepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMessage_tblPriority">
+    <End Role="tblPriority" Type="Self.tblPriority" Multiplicity="1" />
+    <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPriority">
+        <PropertyRef Name="tblPriorityID" />
+      </Principal>
+      <Dependent Role="tblMessage">
+        <PropertyRef Name="tblPriorityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMessageMedia_tblMessage">
+    <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="1" />
+    <End Role="tblMessageMedia" Type="Self.tblMessageMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMessage">
+        <PropertyRef Name="tblMessageID" />
+      </Principal>
+      <Dependent Role="tblMessageMedia">
+        <PropertyRef Name="tblMessageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblEmployeeMessage">
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+    <End Role="tblMessage" Type="Self.tblMessage" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="NotifyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblDepartments" EntityType="Self.tblDepartment" />
+    <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+    <EntitySet Name="tblMessages" EntityType="Self.tblMessage" />
+    <EntitySet Name="tblMessageMedias" EntityType="Self.tblMessageMedia" />
+    <EntitySet Name="tblPriorities" EntityType="Self.tblPriority" />
+    <EntitySet Name="tblTabs" EntityType="Self.tblTab" />
+    <AssociationSet Name="FK_tblMessage_tblDepartment" Association="Self.FK_tblMessage_tblDepartment">
+      <End Role="tblDepartment" EntitySet="tblDepartments" />
+      <End Role="tblMessage" EntitySet="tblMessages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMessage_tblPriority" Association="Self.FK_tblMessage_tblPriority">
+      <End Role="tblPriority" EntitySet="tblPriorities" />
+      <End Role="tblMessage" EntitySet="tblMessages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMessageMedia_tblMessage" Association="Self.FK_tblMessageMedia_tblMessage">
+      <End Role="tblMessage" EntitySet="tblMessages" />
+      <End Role="tblMessageMedia" EntitySet="tblMessageMedias" />
+    </AssociationSet>
+    <AssociationSet Name="tblEmployeeMessage" Association="Self.tblEmployeeMessage">
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+      <End Role="tblMessage" EntitySet="tblMessages" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
